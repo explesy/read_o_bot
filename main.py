@@ -1,7 +1,6 @@
 import logging
 from aiogram import Bot, Dispatcher, executor, types
-
-API_TOKEN = '5667178957:AAFbp5EC3pF84jI72VtH69QiRlVQDeBam0k'
+from .keys import API_TOKEN
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
