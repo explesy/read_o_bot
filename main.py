@@ -1,6 +1,7 @@
 import logging
 from aiogram import Bot, Dispatcher, executor, types
-from .keys import API_TOKEN
+from keys import API_TOKEN
+from book import read_book, split_text_for_tg
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
@@ -19,6 +20,9 @@ async def get_book(message: types.Message):
         await message.document.download(destination_dir='./', make_dirs=True)
         name = message.document.file_name
         await message.reply(f"We've got a file!\nNAME: {name}")
+        book = read_book()
+        fist_text = split_text_for_tg(book)
+        await message.reply(fist_text)
     
     
 
