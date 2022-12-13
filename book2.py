@@ -43,7 +43,7 @@ class Book():
     
     def split_text_for_tg(self, book_text: str) -> str:
         """ Gets first chunk of text in size of 4096 and returns it"""
-        book_text_list = textwrap.wrap(book_text, width=2000)
+        book_text_list = textwrap.wrap(book_text, width=1024)
         # for i in book_text_list:
         #     print(i)
         #     print(f'{len(i)}##############################\n\n')
@@ -53,18 +53,23 @@ class Book():
         if self.is_first_page():
             page = self.book_page[self.page]
             self.page += 1
+            print(self.page, '1')
             return page
         else:
             self.page += 1
+            print(self.page, '2')
             return self.book_page[self.page]
 
     def prev_page(self):
         self.page -= 1
         page = self.book_page[self.page]
+        print(self.page, '3')
         return page 
     
     def is_first_page(self):
-        if self.page == 0:
+        """ Return True if we curently on 1st page so with next previous
+            page we'll go to 0 page """
+        if self.page == 1:
             return True
         else:
             return False
@@ -75,6 +80,13 @@ class Book():
         else:
             return False
 
+    def current_page(self):
+        return self.book_page[self.page]
+    
+    def goto_page(self, page_number):
+        # TODO: check if number in existing range
+        self.page = page_number
+        return self.book_page[self.page]
 
 if __name__ == '__main__':
     b = Book()
